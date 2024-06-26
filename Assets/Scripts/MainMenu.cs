@@ -34,6 +34,8 @@ public class MainMenu : MonoBehaviour
     private void BuildLeaderboard()
     {
         LeaderboardPanel.SetActive(true);
+        Leaderboard.instance.ClearScoresFromJson();
+        Leaderboard.instance.CreateEntry();
     }
 
     private void ExitGame()

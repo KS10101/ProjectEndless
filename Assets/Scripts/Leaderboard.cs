@@ -1,6 +1,6 @@
 using Dreamteck;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEngine;
 
 
@@ -10,6 +10,7 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] private Transform ScoreCardsContainer;
     [SerializeField] private GameObject EntryPrefab;
     private List<ScoreCard> _ScoreCardEntries = new List<ScoreCard>(8);
+    ScoreCard[] ScoreEntriesArray;
 
 
 
@@ -17,36 +18,45 @@ public class Leaderboard : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        //LoadScoresFromJSON();
-        _ScoreCardEntries = LoadScoresFromJSON().ScoreCardEntries;
-        AddScoreCard("al-chan", 15);
-        AddScoreCard("Gamora-Kun", 12);
-        AddScoreCard("Divyanshu-Sama", 1);
+
+        UpdateList();
+        AddScoreCard("al-chan", 19);
+        AddScoreCard("Gamora-Kun", 2);
+        AddScoreCard("Divyanshu-Sama", 100);
+        AddScoreCard("Vidhayak ji", 500);
+        AddScoreCard("Sachiv ji", 200);
+        AddScoreCard("Kartik cha", 5);
+        AddScoreCard("Mishra ji", 1000);
+    }
+
+    public void UpdateList()
+    {
         SaveScoresToJSON();
-        //AddScoreCard("Kartik cha", 5);
-        //SaveScoresToJSON();
-        //CreateEntry();
+        if(LoadScoresFromJSON().ScoreCardEntries == null)
+        {
+            _ScoreCardEntries = new List<ScoreCard>();
+        }
+        else
+            _ScoreCardEntries = LoadScoresFromJSON().ScoreCardEntries;
     }
 
     private void Start()
     {
-        CreateEntry();
-        ScoreCard e1 = new ScoreCard { Name = "ABC", Score = 999 };
-        AddScoreCard(e1);
 
-        AddScoreCard("BAD", Random.Range(0, 999));
-        Debug.Log("Score ADDED");
     }
 
-    private void CreateEntry()
+    public void CreateEntry()
     {
-        _ScoreCardEntries = LoadScoresFromJSON().ScoreCardEntries;
+        UpdateList();
+        var entries = _ScoreCardEntries.OrderByDescending(s => s.Score);
+        ScoreEntriesArray = entries.ToArray();
+        
         // if score card entries is not null 
-        for (int i = 0; i < _ScoreCardEntries.Count; i++)
+        for (int i = 0; i < ScoreEntriesArray.Count(); i++)
         {
             GameObject entry = Instantiate(EntryPrefab, ScoreCardsContainer);
             entry.SetActive(true);
-            entry.GetComponent<ScoreEntriesSetter>().SetDataEntries(_ScoreCardEntries[i].Rank, _ScoreCardEntries[i].Name, _ScoreCardEntries[i].Score);
+            entry.GetComponent<ScoreEntriesSetter>().SetDataEntries(i+1, ScoreEntriesArray[i].Name, ScoreEntriesArray[i].Score);
 
         }
     }
@@ -56,13 +66,16 @@ public class Leaderboard : MonoBehaviour
     public void AddScoreCard(ScoreCard _scoreCard)
     {
         _ScoreCardEntries.Add(_scoreCard);
-
+        UpdateList();
+        SaveScoresToJSON();
     }
 
     public void AddScoreCard(string _name, int _score)
     {
         ScoreCard _scorecard = new ScoreCard { Name = _name, Score = _score };
         _ScoreCardEntries.Add(_scorecard);
+        UpdateList();
+        SaveScoresToJSON();
     }
 
     public ScoreCardEntry LoadScoresFromJSON()
@@ -82,7 +95,11 @@ public class Leaderboard : MonoBehaviour
         string json = JsonUtility.ToJson(Entries);
         PlayerPrefs.SetString("ScoreCardEntries", json);
         PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetString("ScoreCardEntries"));
+    }
+
+    public void ClearScoresFromJson()
+    {
+        PlayerPrefs.SetString("ScoreCardEntries", "");
     }
 }
 
