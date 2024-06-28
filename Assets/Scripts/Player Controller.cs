@@ -47,8 +47,11 @@ public class PlayerController : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
-        this.speed = speed;
-        this.runner.followSpeed = speed;
+        if(this.speed <= 30)
+        {
+            this.speed = speed;
+            this.runner.followSpeed = speed;
+        }
         Debug.Log($"speed - {runner.followSpeed}");
         if (this.speed == 0)
             Debug.Log("GAME OVER");

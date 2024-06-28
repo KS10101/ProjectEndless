@@ -7,8 +7,8 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    private int CurrentScore;
-    private int MaxScore;
+    private int CurrentScore = 0;
+    private int MaxScore = 0;
     public TextMeshProUGUI ScoreTextField;
 
     private void Awake()
@@ -22,6 +22,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int score)
     {
         CurrentScore = CurrentScore + score;
+        SetMaxScore(CurrentScore);
         UpdateScoreText(CurrentScore);
     }
 
@@ -31,13 +32,19 @@ public class ScoreManager : MonoBehaviour
             CurrentScore = CurrentScore - score;
         else
             CurrentScore = 0;
-
+        SetMaxScore(CurrentScore);
         UpdateScoreText(CurrentScore);
     }
 
     public int GetCurrentScore()
     {
         return CurrentScore;
+    }
+
+    public void ResetLocalScore()
+    {
+        CurrentScore = 0;
+        MaxScore = 0;
     }
 
     public int GetMaxScore()

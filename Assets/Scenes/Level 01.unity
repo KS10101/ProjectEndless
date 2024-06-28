@@ -434,7 +434,6 @@ MonoBehaviour:
   _loopSegmentLogic: 0
   _levelCollection:
   - {fileID: 11400000, guid: 4653cac40af10234eaf1dfa4f4ac34f5, type: 2}
-  - {fileID: 11400000, guid: 72aa9998cf4f1f546a271cbe8bdec4b6, type: 2}
   _levelIteration: 2
   _levelRandomizer: {fileID: 0}
   _generationRandomizer: {fileID: 11400000, guid: fb600be43607d7e47822c78754644d57, type: 2}
@@ -763,6 +762,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1728935802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6950406395172560096, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
+  m_PrefabInstance: {fileID: 2024323107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2024323107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -839,16 +843,94 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6940450681587844910, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6950406395172560096, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2024323115}
   m_SourcePrefab: {fileID: 100100000, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
 --- !u!4 &2024323108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908588871505200767, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
   m_PrefabInstance: {fileID: 2024323107}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2024323115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728935802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2d491ea20618745ada741714dad7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMode: 0
+  startPercent: 0
+  startDistance: 10
+  startMode: 1
+  followSpeed: 10
+  follow: 1
+  isPlayer: 1
+  loop: 0
+  physicsMode: 0
+  _motion:
+    enabled: 1
+    offset: {x: 0, y: 1.5}
+    useSplineSizes: 1
+    rotationOffset: {x: 0, y: 0, z: 0}
+    baseScale: {x: 1, y: 1, z: 1}
+    sample:
+      position: {x: 0, y: 0, z: 0}
+      up: {x: 0, y: 0, z: 0}
+      forward: {x: 0, y: 0, z: 0}
+      color: {r: 0, g: 0, b: 0, a: 0}
+      size: 0
+      percent: 0
+    applyPositionX: 1
+    applyPositionY: 1
+    applyPositionZ: 1
+    applyRotationX: 1
+    applyRotationY: 1
+    applyRotationZ: 1
+    applyScaleX: 0
+    applyScaleY: 0
+    applyScaleZ: 0
+  width: 9
+  laneCount: 3
+  startLane: 2
+  laneSwitchSpeed: 8
+  useCustomPaths: 1
+  laneSwitchSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  laneVector: {x: 1, y: 0}
+  _lane: 2
 --- !u!1 &2146343439
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,6 @@ public class Leaderboard : MonoBehaviour
     private List<ScoreCard> _ScoreCardEntries = new List<ScoreCard>(8);
     ScoreCard[] ScoreEntriesArray;
 
-
-
     private void Awake()
     {
         if (instance == null)
@@ -40,11 +38,6 @@ public class Leaderboard : MonoBehaviour
             _ScoreCardEntries = LoadScoresFromJSON().ScoreCardEntries;
     }
 
-    private void Start()
-    {
-
-    }
-
     public void CreateEntry()
     {
         UpdateList();
@@ -60,7 +53,6 @@ public class Leaderboard : MonoBehaviour
 
         }
     }
-
 
 
     public void AddScoreCard(ScoreCard _scoreCard)

@@ -11,6 +11,12 @@ public class OptionTab : MonoBehaviour
     [HideInInspector] public OptionsContainer container;
     [SerializeField] private TextMeshProUGUI OptionText;
 
+    public void Initialize(bool isCorrect, string answer)
+    {
+        OptionText.text = answer;
+        this.IsCorrect = isCorrect;
+    }
+
     public void SetMaterial(Material mat)
     {
         GetComponent<MeshRenderer>().sharedMaterial = mat;
