@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
         if (LevelGenerator.instance.ready)
             runner.followSpeed = speed;
 
-        if (Input.GetKeyDown(KeyCode.A)) runner.lane--;
-        if (Input.GetKeyDown(KeyCode.D)) runner.lane++;
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) runner.lane--;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) runner.lane++;
 
         if (Input.GetKeyDown(KeyCode.Space)) LevelGenerator.instance.Restart();       //Leaderboard.instance.SaveScoresToJSON();
     }
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
-        if(this.speed <= 30)
+        if(this.speed <= 30 && this.speed > 0)
         {
             this.speed = speed;
             this.runner.followSpeed = speed;
