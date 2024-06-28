@@ -9,9 +9,9 @@ public class LevelGameManager : MonoBehaviour
 {
     public static LevelGameManager instance;
 
-    [SerializeField] private Button playAgain;
-    [SerializeField] private Button mainMenu;
-    [SerializeField] private Button leadboard;
+    [SerializeField] private Button playAgainButton;
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button leadboardButton;
 
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject highscoreCanvas;
@@ -21,7 +21,17 @@ public class LevelGameManager : MonoBehaviour
 
     private void OnGameOver()
     {
-        
+        if((Leaderboard.instance.GetEntryCount() < 8) || 
+            (Leaderboard.instance.GetEntryCount() == 8 && ScoreManager.instance.GetCurrentScore() > Leaderboard.instance.GetLowestScore()))
+        {
+            highscoreCanvas.SetActive(true);
+
+        }
+        else
+        {
+            highscoreCanvas.SetActive(false);
+            gameOverCanvas.SetActive(true);
+        }
 
 
         currentScore.text = "Score: "+ScoreManager.instance.GetCurrentScore().ToString();
@@ -35,15 +45,15 @@ public class LevelGameManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        playAgain.onClick.AddListener(Restart);
-        mainMenu.onClick.AddListener(GoToMenu);
+        playAgainButton.onClick.AddListener(Restart);
+        mainMenuButton.onClick.AddListener(GoToMenu);
         //leaderboard
     }
 
     private void OnDisable()
     {
-        playAgain.onClick.RemoveListener(Restart);
-        mainMenu.onClick.RemoveListener(GoToMenu);
+        playAgainButton.onClick.RemoveListener(Restart);
+        mainMenuButton.onClick.RemoveListener(GoToMenu);
     }
 
     public void Restart()
