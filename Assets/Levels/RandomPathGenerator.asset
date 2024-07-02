@@ -41,8 +41,8 @@ MonoBehaviour:
   useRoll: 0
   useColors: 0
   useSizes: 0
-  minOrientation: {x: -5, y: -90, z: 0}
-  maxOrientation: {x: 15, y: 90, z: 0}
+  minOrientation: {x: -5, y: -15, z: 0}
+  maxOrientation: {x: 5, y: 15, z: 0}
   minRandomStep: {x: 5, y: 10, z: 0}
   maxRandomStep: {x: 10, y: 45, z: 0}
   minTurnRate: {x: 5, y: 10, z: 0}

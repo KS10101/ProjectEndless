@@ -49,7 +49,7 @@ namespace Dreamteck.Forever
             double globalPercent = LevelGenerator.instance.LocalToGlobalPercent(runner.result.percent, runnerSegmentIndex);
             LevelGenerator.instance.Evaluate(LevelGenerator.instance.Travel(globalPercent, cameraDistance, Spline.Direction.Backward), ref evalResult);
             trs.position = evalResult.position + Vector3.up * cameraHeight;
-            rotationSmooth = Quaternion.Slerp(rotationSmooth, Quaternion.Slerp(evalResult.rotation, runner.result.rotation, Time.deltaTime * 1f), Time.deltaTime * 2f);
+            rotationSmooth = Quaternion.Slerp(rotationSmooth, Quaternion.Slerp(evalResult.rotation, runner.result.rotation, Time.deltaTime * .5f), Time.deltaTime * 1f);
             trs.rotation = rotationSmooth * Quaternion.AngleAxis(cameraAngle, Vector3.right);
         }
     }

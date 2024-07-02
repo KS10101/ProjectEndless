@@ -34,7 +34,7 @@ public class Leaderboard : MonoBehaviour
 
     public void UpdateList()
     {
-        if (LoadScoresFromJSON().ScoreCardEntries == null)
+        if (LoadScoresFromJSON() == null)
         {
             _ScoreCardEntries = new List<ScoreCard>();
         }
@@ -62,6 +62,16 @@ public class Leaderboard : MonoBehaviour
         SaveScoresToJSON();
     }
 
+    public void AddScoreAtEnd(string name, int Score)
+    {
+        UpdateList();
+        ScoreCard[] temp = SortList(_ScoreCardEntries);
+        temp[temp.Count() - 1] = new ScoreCard{Name = name, Score = Score};
+
+        _ScoreCardEntries = temp.ToList();
+        SaveScoresToJSON();
+
+    }
 
     public int GetEntryCount()
     {
