@@ -28,13 +28,14 @@ public class MainMenu : MonoBehaviour
 
     private void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        this.gameObject.SetActive(false);
     }
 
     private void BuildLeaderboard()
     {
         LeaderboardPanel.SetActive(true);
-        Leaderboard.instance.ClearScoresFromJson();
+        //Leaderboard.instance.ClearScoresFromJson();
         Leaderboard.instance.CreateEntry();
     }
 

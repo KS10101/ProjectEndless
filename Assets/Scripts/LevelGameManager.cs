@@ -18,10 +18,15 @@ public class LevelGameManager : MonoBehaviour
 
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject highscoreCanvas;
+    [SerializeField] private GameObject leaderboardCanvas;
 
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI highScore;
 
+    private void Start()
+    {
+        OnGameOver();
+    }
 
     private string SetName()
     {
@@ -34,24 +39,23 @@ public class LevelGameManager : MonoBehaviour
         if (SetName() != null)
         {
             string nameText = SetName();
-            int score = 123;//ScoreManager.instance.GetCurrentScore();
+            int score = ScoreManager.instance.GetCurrentScore();
 
-            Debug.Log($"Name - {SetName()} Score - {score}");
+            Debug.Log($"Name - {SetName()} Score - {score} Current Score - {ScoreManager.instance.GetCurrentScore()}");
             Leaderboard.instance.AddScoreCard(nameText, score);
-            //highscoreCanvas.SetActive(false);
+            highscoreCanvas.SetActive(false);
             gameOverCanvas.SetActive(true);
         }
 
     }
+
     public void OnGameOver()
     {
 
-     
-
-        if ((Leaderboard.instance.GetEntryCount() < 8) || 
+        if ((Leaderboard.instance.GetEntryCount() < 8) ||
             (Leaderboard.instance.GetEntryCount() == 8 && ScoreManager.instance.GetCurrentScore() > Leaderboard.instance.GetLowestScore()))
         {
-            highScore.text = Leaderboard.instance.GetHighestScore().ToString();
+            highScore.text = ScoreManager.instance.GetCurrentScore().ToString();
             highscoreCanvas.SetActive(true);
 
         }
@@ -62,16 +66,14 @@ public class LevelGameManager : MonoBehaviour
             gameOverCanvas.SetActive(true);
         }
 
-
-        currentScore.text = "Score: "+ScoreManager.instance.GetCurrentScore().ToString();
-
     }
+
     private void OnEnable()
     {
         playAgainButton.onClick.AddListener(Restart);
         mainMenuButton.onClick.AddListener(GoToMenu);
         submitButton.onClick.AddListener(OnSubmitButtonClick);
-        //leaderboard
+        leadboardButton.onClick.AddListener(BuildLeaderboard);
     }
 
     private void OnDisable()
@@ -79,7 +81,7 @@ public class LevelGameManager : MonoBehaviour
         playAgainButton.onClick.RemoveListener(Restart);
         mainMenuButton.onClick.RemoveListener(GoToMenu);
         submitButton.onClick.RemoveListener(OnSubmitButtonClick);
-        //leaderboard
+        leadboardButton.onClick.RemoveListener(BuildLeaderboard);
     }
 
     public void Restart()
@@ -93,5 +95,13 @@ public class LevelGameManager : MonoBehaviour
         SceneManager.LoadScene((int)SceneHandler.instance.sceneSelect);
     }
 
-
+    private void BuildLeaderboard()
+    {
+        gameOverCanvas.SetActive(false);
+        highscoreCanvas.SetActive(false);
+        leaderboardCanvas.SetActive(true);
+        //Leaderboard.instance.ClearScoresFromJson();
+        //Leaderboard.instance.SaveScoresToJSON();
+        Leaderboard.instance.CreateEntry();
+    }
 }

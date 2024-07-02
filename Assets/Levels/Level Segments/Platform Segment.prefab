@@ -553,7 +553,7 @@ MonoBehaviour:
     size: {x: 12.450488, y: 6.09831, z: 24.280006}
   builders:
   - {fileID: 5268855979802403201}
-  unpacked: 1
+  unpacked: 0
   alwaysDraw: 0
   drawGeneratedSpline: 1
   drawGeneratedSamples: 1
@@ -561,7 +561,7 @@ MonoBehaviour:
   drawEntranceAndExit: 1
   drawBounds: 1
   drawCustomPaths: 1
-  editorChildCount: 11
+  editorChildCount: 12
 --- !u!1 &1629771947433351248
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   queue: 0
   priority: 0
-  m_speedBoostAmount: 2
+  m_BoostAmount: 2
+  m_retardationAmount: 4
   BaseMat: {fileID: 2100000, guid: 215c8a348de394345afde515d84980ed, type: 2}
   RightOptionMat: {fileID: 2100000, guid: 992a614e1bfe22c41bf0c036963df87d, type: 2}
   WrongOptionMat: {fileID: 2100000, guid: ef45d5e42b92ee944b61cff12485a87b, type: 2}

@@ -1983,7 +1983,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1706924439}
   - component: {fileID: 1706924440}
-  - component: {fileID: 1706924441}
   m_Layer: 5
   m_Name: ScoreCardsContainer
   m_TagString: Untagged
@@ -2035,20 +2034,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 8}
   m_Constraint: 2
   m_ConstraintCount: 10
---- !u!114 &1706924441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1706924438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39dd2f3b7fec754438b9567b6b92fb21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScoreCardsContainer: {fileID: 1706924439}
-  EntryPrefab: {fileID: 103876242324555617, guid: fd5a3c9732b52d64e9e6f07d44c9e162, type: 3}
 --- !u!1 &1723937081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2211,10 +2196,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TITLE
+  m_text: ENDLESS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2238,13 +2223,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2300,6 +2285,7 @@ GameObject:
   - component: {fileID: 1850499986}
   - component: {fileID: 1850499985}
   - component: {fileID: 1850499984}
+  - component: {fileID: 1850499987}
   m_Layer: 5
   m_Name: Leaderboard
   m_TagString: Untagged
@@ -2383,6 +2369,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850499982}
   m_CullTransparentMesh: 1
+--- !u!114 &1850499987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850499982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39dd2f3b7fec754438b9567b6b92fb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreCardsContainer: {fileID: 1706924439}
+  EntryPrefab: {fileID: 103876242324555617, guid: fd5a3c9732b52d64e9e6f07d44c9e162, type: 3}
 --- !u!1 &1874571460
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,25 +21,26 @@ public class Leaderboard : MonoBehaviour
             instance = this;
 
         UpdateList();
-        AddScoreCard("al-chan", 19);
-        AddScoreCard("Gamora-Kun", 200);
-        AddScoreCard("Divyanshu-Sama", 200);
-        AddScoreCard("Vidhayak ji", 200);
-        AddScoreCard("Dhruv-San", 200);
-        AddScoreCard("Kartik cha", 200);
-        AddScoreCard("Mishra ji", 1000);
+        SaveScoresToJSON();
+        //AddScoreCard("al-chan", 19);
+        //AddScoreCard("Gamora-Kun", 200);
+        //AddScoreCard("Divyanshu-Sama", 200);
+        //AddScoreCard("Vidhayak ji", 200);
+        //AddScoreCard("Dhruv-San", 200);
+        //AddScoreCard("Kartik cha", 200);
+        //AddScoreCard("Mishra ji", 1000);
         //AddScoreCard("Cat", 200);
     }
 
     public void UpdateList()
     {
-        SaveScoresToJSON();
-        if(LoadScoresFromJSON().ScoreCardEntries == null)
+        if (LoadScoresFromJSON().ScoreCardEntries == null)
         {
             _ScoreCardEntries = new List<ScoreCard>();
         }
         else
             _ScoreCardEntries = LoadScoresFromJSON().ScoreCardEntries;
+        SaveScoresToJSON();
     }
 
     public void CreateEntry()
@@ -58,22 +59,9 @@ public class Leaderboard : MonoBehaviour
             
         }
 
-
+        SaveScoresToJSON();
     }
 
-    //public bool CheckforHighScore(int Score)
-    //{
-    //    bool CheckStatus = false;
-    //    UpdateList();
-    //    if (_ScoreCardEntries.Count < 8)
-    //        CheckStatus = true;
-    //    else if (_ScoreCardEntries.Count == 8 && Score > GetLowestScore())
-    //    {
-    //        CheckStatus = true;
-    //    }
-
-    //    return CheckStatus;
-    //}
 
     public int GetEntryCount()
     {
@@ -117,9 +105,11 @@ public class Leaderboard : MonoBehaviour
     public void AddScoreCard(string _name, int _score)
     {
         ScoreCard _scorecard = new ScoreCard { Name = _name, Score = _score };
-        _ScoreCardEntries.Add(_scorecard);
         UpdateList();
+        _ScoreCardEntries.Add(_scorecard);
+        
         SaveScoresToJSON();
+        Debug.Log("Score Saved");
     }
 
     public ScoreCardEntry LoadScoresFromJSON()
@@ -139,6 +129,8 @@ public class Leaderboard : MonoBehaviour
         string json = JsonUtility.ToJson(Entries);
         PlayerPrefs.SetString("ScoreCardEntries", json);
         PlayerPrefs.Save();
+        Debug.Log($"Saved to JSon" +
+            $"{PlayerPrefs.GetString("ScoreCardEntries")}");
     }
 
     public void ClearScoresFromJson()

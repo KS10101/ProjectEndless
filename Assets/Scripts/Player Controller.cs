@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     LaneRunner runner;
     float speed;
+    GameObject lvlmanager;
     
 
     private void Awake()
@@ -21,17 +22,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
-
-        //StartCoroutine(Countdown()); 
+        StartCoroutine(Countdown());
         Debug.Log($"speed - {runner.followSpeed}");
     }
 
     private void Update()
     {
-        if (LevelGenerator.instance.ready)
-            runner.followSpeed = speed;
-
         if (Input.GetKeyDown(KeyCode.LeftArrow)) runner.lane--;
         if (Input.GetKeyDown(KeyCode.RightArrow)) runner.lane++;
 
@@ -41,7 +37,8 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Countdown()
     {
         yield return new WaitForSeconds(3f);
-        runner.followSpeed = speed;
+        if (LevelGenerator.instance.ready)
+            runner.followSpeed = speed;
         Debug.Log("Player Start Moving");
     }
 
@@ -52,10 +49,13 @@ public class PlayerController : MonoBehaviour
             this.speed = speed;
             this.runner.followSpeed = speed;
         }
-        Debug.Log($"speed - {runner.followSpeed}");
-        if (this.speed == 0)
+        Debug.Log($"speed : {runner.followSpeed}");
+        if (this.speed <= 2)
         {
-            LevelGameManager.instance.OnGameOver();
+            this.speed = 0;
+            this.runner.followSpeed = speed;
+            lvlmanager = FindAnyObjectByType<LevelGameManager>().gameObject;
+            lvlmanager.GetComponent<LevelGameManager>().enabled = true;
             Debug.Log("GAME OVER");
         }
            
