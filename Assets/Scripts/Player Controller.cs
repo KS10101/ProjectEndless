@@ -54,7 +54,12 @@ public class PlayerController : MonoBehaviour
         }
         Debug.Log($"speed - {runner.followSpeed}");
         if (this.speed == 0)
+        {
+            LevelGameManager.instance.OnGameOver();
             Debug.Log("GAME OVER");
+        }
+           
+
     }
 
     public float GetSpeed()

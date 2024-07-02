@@ -12,6 +12,9 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button leadboardButton;
+    [SerializeField] private Button submitButton;
+
+    [SerializeField] private TMP_InputField nameInput;
 
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject highscoreCanvas;
@@ -19,34 +22,55 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI highScore;
 
-    private void OnGameOver()
+
+    private string SetName()
     {
-        if((Leaderboard.instance.GetEntryCount() < 8) || 
+        string inputText = nameInput.text;
+        return inputText;
+    }
+
+    private void OnSubmitButtonClick()
+    {
+        if (SetName() != null)
+        {
+            string nameText = SetName();
+            int score = 123;//ScoreManager.instance.GetCurrentScore();
+
+            Debug.Log($"Name - {SetName()} Score - {score}");
+            Leaderboard.instance.AddScoreCard(nameText, score);
+            //highscoreCanvas.SetActive(false);
+            gameOverCanvas.SetActive(true);
+        }
+
+    }
+    public void OnGameOver()
+    {
+
+     
+
+        if ((Leaderboard.instance.GetEntryCount() < 8) || 
             (Leaderboard.instance.GetEntryCount() == 8 && ScoreManager.instance.GetCurrentScore() > Leaderboard.instance.GetLowestScore()))
         {
+            highScore.text = Leaderboard.instance.GetHighestScore().ToString();
             highscoreCanvas.SetActive(true);
 
         }
         else
         {
+            currentScore.text = ScoreManager.instance.GetCurrentScore().ToString();
             highscoreCanvas.SetActive(false);
             gameOverCanvas.SetActive(true);
         }
 
 
         currentScore.text = "Score: "+ScoreManager.instance.GetCurrentScore().ToString();
-        //Trigger Game Over Screen 
-        //if leaderBoard list count is < 8 then insert the current score at leaderboard.count index.
-        //if leaderBoard list count is > 8
-        //get current score and compare it with the last index value in the Sorted Leaderboard list.
-        //if current score is less than last index value then dont insert value in leader board
-        //else insert current score in leader board list.
 
     }
     private void OnEnable()
     {
         playAgainButton.onClick.AddListener(Restart);
         mainMenuButton.onClick.AddListener(GoToMenu);
+        submitButton.onClick.AddListener(OnSubmitButtonClick);
         //leaderboard
     }
 
@@ -54,6 +78,8 @@ public class LevelGameManager : MonoBehaviour
     {
         playAgainButton.onClick.RemoveListener(Restart);
         mainMenuButton.onClick.RemoveListener(GoToMenu);
+        submitButton.onClick.RemoveListener(OnSubmitButtonClick);
+        //leaderboard
     }
 
     public void Restart()

@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class OptionsContainer :Builder
 {
-    [SerializeField] private float m_speedBoostAmount = 2f;
+    [SerializeField] private float m_BoostAmount = 2f;
+    [SerializeField] private float m_retardationAmount = 4f;
     private float speed;
     private OptionTab[] _boostPoints;
     [SerializeField] private Material BaseMat;
@@ -77,7 +78,7 @@ public class OptionsContainer :Builder
             if (point.IsCorrect)
                 point.SetMaterial(RightOptionMat);
         }
-        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_speedBoostAmount);
+        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         ScoreManager.instance.AddScore(CorrectOptionPoints);
     }
 
@@ -90,7 +91,7 @@ public class OptionsContainer :Builder
             else
                 point.SetMaterial(WrongOptionMat);
         }
-        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_speedBoostAmount);
+        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
     }
 }

@@ -1619,7 +1619,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &903883204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,14 +4116,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 9
+  m_ContentType: 0
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 8
+  m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 0
@@ -5074,6 +5074,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8835188588262220551, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6940450681587844910, guid: 6c5c09be931dd9b429afc774c7f9bbdd, type: 3}
     m_RemovedGameObjects: []
@@ -5095,7 +5099,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728935802}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d2d491ea20618745ada741714dad7c0, type: 3}
   m_Name: 
@@ -5477,9 +5481,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3121ba3fd785449ac865150349dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playAgain: {fileID: 2021051420}
-  mainMenu: {fileID: 1137899184}
-  leadboard: {fileID: 0}
+  playAgainButton: {fileID: 2021051420}
+  mainMenuButton: {fileID: 1137899184}
+  leadboardButton: {fileID: 442117243}
+  submitButton: {fileID: 855999648}
+  nameInput: {fileID: 1510810678}
   gameOverCanvas: {fileID: 195060641}
   highscoreCanvas: {fileID: 943724539}
   currentScore: {fileID: 1507166702}

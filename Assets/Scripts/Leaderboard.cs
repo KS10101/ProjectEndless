@@ -28,7 +28,7 @@ public class Leaderboard : MonoBehaviour
         AddScoreCard("Dhruv-San", 200);
         AddScoreCard("Kartik cha", 200);
         AddScoreCard("Mishra ji", 1000);
-        AddScoreCard("Cat", 200);
+        //AddScoreCard("Cat", 200);
     }
 
     public void UpdateList()
