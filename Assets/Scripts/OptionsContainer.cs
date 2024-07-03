@@ -17,18 +17,22 @@ public class OptionsContainer :Builder
     [SerializeField] private Material WrongOptionMat;
     [SerializeField] private int CorrectOptionPoints = 5;
     [SerializeField] private int WrongOptionPoints = 2;
-
+    public bool answered = false;
     [SerializeField] private int _minOperandA = 1;
     [SerializeField] private int _maxOperandA = 30;
     [SerializeField] private int _minOperandB = 0;
     [SerializeField] private int _maxOperandB = 20;
     [SerializeField] private TextMeshProUGUI questionText;
+    Transform cameraTrs;
+    float alpha = 0f;
+    float lastAlpha = 0f;
+    public float displayDistance = 20f;
 
 
     protected override void Build()
     {
         base.Build();
-
+        cameraTrs = Camera.main.transform;
         _boostPoints = GetComponentsInChildren<OptionTab>();
         int a = Random(_minOperandA, _maxOperandA + 1);
         int b = Random(_minOperandB, _maxOperandB + 1);
@@ -56,20 +60,43 @@ public class OptionsContainer :Builder
                 _boostPoints[i].Initialize(false, randomAnswer.ToString());
             }
             _boostPoints[i].GetComponent<MeshRenderer>().sharedMaterial = BaseMat;
+            _boostPoints[i].ToggleCollider(true);
+            _boostPoints[i].SetAlpha(0f);
         }
+        SetTextAlpha(questionText, 0f);
         Debug.Log("Build DONE");
     }
 
+    private void Update()
+    {
+        if (!isDone) return;
+        if (!answered)
+        {
+            //Make the texts appear if the question is not answered
+            if (Vector3.Distance(trs.position, cameraTrs.position) <= displayDistance) 
+                alpha = Mathf.MoveTowards(alpha, 1f, Time.deltaTime * PlayerController.instance.GetSpeed() * 0.1f);
+            else 
+                alpha = Mathf.MoveTowards(alpha, 0f, Time.deltaTime);
+        }
+        else
+        {
+            alpha = Mathf.MoveTowards(alpha, 0f, Time.deltaTime * 0.1f);
+        }
+        if (alpha != lastAlpha)
+        {
+            SetTextAlpha(questionText, alpha);
+            for (int i = 0; i < _boostPoints.Length; i++) _boostPoints[i].SetAlpha(alpha);
+            lastAlpha = alpha;
+        }
+    }
 
+     private void SetTextAlpha(TextMeshProUGUI tm, float alpha)
+    {
+        Color col = tm.color;
+        col.a = alpha;
+        tm.color = col;
+    }
 
-    //private void Start()
-    //{
-    //    foreach (OptionTab point in _boostPoints)
-    //    {
-    //        point.container = this;
-    //        point.GetComponent<MeshRenderer>().sharedMaterial = BaseMat;
-    //    }
-    //}
 
     public void OnRightOptionHit()
     {
@@ -77,7 +104,9 @@ public class OptionsContainer :Builder
         {
             if (point.IsCorrect)
                 point.SetMaterial(RightOptionMat);
+            point.ToggleCollider(false);
         }
+        answered = true;
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         ScoreManager.instance.AddScore(CorrectOptionPoints);
     }
@@ -90,7 +119,9 @@ public class OptionsContainer :Builder
                 point.SetMaterial(RightOptionMat);
             else
                 point.SetMaterial(WrongOptionMat);
+            point.ToggleCollider(false);
         }
+        answered = true;
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
     }

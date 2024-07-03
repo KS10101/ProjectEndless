@@ -625,11 +625,13 @@ MonoBehaviour:
   WrongOptionMat: {fileID: 2100000, guid: ef45d5e42b92ee944b61cff12485a87b, type: 2}
   CorrectOptionPoints: 5
   WrongOptionPoints: 2
+  answered: 0
   _minOperandA: 1
   _maxOperandA: 30
   _minOperandB: 0
   _maxOperandB: 20
   questionText: {fileID: 6667720899860578121}
+  displayDistance: 50
 --- !u!223 &4153496953465793408
 Canvas:
   m_ObjectHideFlags: 0

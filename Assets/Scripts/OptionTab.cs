@@ -7,7 +7,6 @@ using UnityEngine;
 public class OptionTab : MonoBehaviour
 {
     public bool IsCorrect = false;
-    public bool Answered = false;
     [HideInInspector] public OptionsContainer container;
     [SerializeField] private TextMeshProUGUI OptionText;
 
@@ -22,9 +21,21 @@ public class OptionTab : MonoBehaviour
         GetComponent<MeshRenderer>().sharedMaterial = mat;
     }
 
+    public void SetAlpha(float alpha)
+    {
+        Color col = OptionText.color;
+        col.a = alpha;
+        OptionText.color = col;
+    }
+
+    public void ToggleCollider(bool state)
+    {
+        GetComponent<BoxCollider>().enabled = state;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (Answered) return;
+        if (container.answered) return;
 
         if (other.GetComponent<Runner>() == null) return;
 

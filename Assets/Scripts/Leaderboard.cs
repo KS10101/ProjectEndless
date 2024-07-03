@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class Leaderboard : MonoBehaviour
@@ -14,6 +15,7 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] private GameObject EntryPrefab;
     private List<ScoreCard> _ScoreCardEntries = new List<ScoreCard>(8);
     ScoreCard[] ScoreEntriesArray;
+    [SerializeField] private Button backButton;
 
     private void Awake()
     {

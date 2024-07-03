@@ -45,6 +45,7 @@ public class ScoreManager : MonoBehaviour
     {
         CurrentScore = 0;
         MaxScore = 0;
+        UpdateScoreText(CurrentScore);
     }
 
     public int GetMaxScore()

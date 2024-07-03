@@ -56,6 +56,7 @@ public class LevelGameManager : MonoBehaviour
 
     public void OnGameOver()
     {
+        PlayerController.instance.enabled = false;
         inGameUICanvas.SetActive(false);
         if ((Leaderboard.instance.GetEntryCount() < 8 && ScoreManager.instance.GetCurrentScore() != 0) ||
             (Leaderboard.instance.GetEntryCount() == 8 && ScoreManager.instance.GetCurrentScore() > Leaderboard.instance.GetLowestScore()))
