@@ -110,8 +110,8 @@ public class OptionsContainer :Builder
             point.ToggleCollider(false);
         }
         answered = true;
-        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         ScoreManager.instance.AddScore(CorrectOptionPoints);
+        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         AudioManager.instance.PlaySFX(correctSFX);
     }
 
@@ -126,8 +126,8 @@ public class OptionsContainer :Builder
             point.ToggleCollider(false);
         }
         answered = true;
-        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
+        PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         AudioManager.instance.PlaySFX(incorrectSFX);
     }
 }

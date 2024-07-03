@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
     LaneRunner runner;
     float speed;
-    GameObject lvlmanager;
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] GameObject CountdownCanvas;
 
@@ -70,8 +69,8 @@ public class PlayerController : MonoBehaviour
         {
             this.speed = 0;
             this.runner.followSpeed = this.speed;
-            lvlmanager = FindAnyObjectByType<LevelGameManager>().gameObject;
-            lvlmanager.GetComponent<LevelGameManager>().enabled = true;
+
+            LevelGameManager.instance.OnGameOver();
             Debug.Log("GAME OVER");
         }
         SetAniamtionSpeed(this.runner.followSpeed / 10);

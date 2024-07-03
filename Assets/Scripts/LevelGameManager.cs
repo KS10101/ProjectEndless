@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -28,9 +29,11 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField] private AudioClip gameOverSFX;
     [SerializeField] private AudioClip highscoreSFX;
 
-    private void Start()
+
+    private void Awake()
     {
-        OnGameOver();
+        if (instance == null)
+            instance = this;
     }
 
     private string SetName()
@@ -53,9 +56,10 @@ public class LevelGameManager : MonoBehaviour
             else if (Leaderboard.instance.GetEntryCount() >= 8)
                 Leaderboard.instance.AddScoreAtEnd(nameText, score);
             highscoreCanvas.SetActive(false);
-            currentScore.text = ScoreManager.instance.GetCurrentScore().ToString();
-            gameOverCanvas.SetActive(true);
             
+            gameOverCanvas.SetActive(true);
+            currentScore.text = ScoreManager.instance.GetCurrentScore().ToString();
+
         }
 
     }
@@ -89,6 +93,7 @@ public class LevelGameManager : MonoBehaviour
         mainMenuButton.onClick.AddListener(GoToMenu);
         submitButton.onClick.AddListener(OnSubmitButtonClick);
         leadboardButton.onClick.AddListener(BuildLeaderboard);
+
     }
 
     private void OnDisable()
@@ -97,7 +102,9 @@ public class LevelGameManager : MonoBehaviour
         mainMenuButton.onClick.RemoveListener(GoToMenu);
         submitButton.onClick.RemoveListener(OnSubmitButtonClick);
         leadboardButton.onClick.RemoveListener(BuildLeaderboard);
+
     }
+
 
     public void Restart()
     {
@@ -109,7 +116,7 @@ public class LevelGameManager : MonoBehaviour
     public void GoToMenu()
     {
         AudioManager.instance.PlaySFX(clickSFX);
-        SceneManager.LoadScene((int)SceneHandler.instance.sceneSelect);
+        SceneManager.LoadSceneAsync(0);
     }
 
     private void BuildLeaderboard()
