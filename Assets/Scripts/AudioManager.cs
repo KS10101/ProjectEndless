@@ -20,12 +20,13 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayBGSound();
+        //PlayBGSound();
         SFX_Audio.loop = false;
     }
 
-    private void PlayBGSound()
+    public void PlayBGSound(AudioClip clip)
     {
+        BG_Audio.clip = clip;
         BG_Audio.loop = true;
         if(BG_Audio.clip != null)
             BG_Audio.playOnAwake = true;
@@ -36,6 +37,11 @@ public class AudioManager : MonoBehaviour
         SFX_Audio.clip = clip;
         SFX_Audio.loop = false;
         SFX_Audio.Play();
+    }
+
+    public void StopBGSound()
+    {
+        BG_Audio.Stop();
     }
 }
 

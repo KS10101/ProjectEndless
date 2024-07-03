@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Animator PlayerAnimator;
     [SerializeField] GameObject CountdownCanvas;
 
+    [SerializeField] private AudioClip backgroundClip;
+    [SerializeField] private AudioClip countdownClip;
+
     private void Awake()
     {
         runner = GetComponent<LaneRunner>();
@@ -34,8 +37,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow)) runner.lane--;
         if (Input.GetKeyDown(KeyCode.RightArrow)) runner.lane++;
 
-        //if (Input.GetKeyDown(KeyCode.Space)) LevelGenerator.instance.Restart(); 
-        //Leaderboard.instance.SaveScoresToJSON();
+        if (Input.GetKeyDown(KeyCode.Space)) LevelGenerator.instance.Restart();
+        Leaderboard.instance.SaveScoresToJSON();
 
         Debug.Log($"animation Speed: {PlayerAnimator.GetFloat("SpeedRate")}");
     }
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         CountdownCanvas.SetActive(true);
         CountdownCanvas.GetComponent<Animator>().enabled = true;
+        AudioManager.instance.PlaySFX(countdownClip);
         yield return new WaitForSeconds(4f);
         if (LevelGenerator.instance.ready)
             runner.followSpeed = speed;
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
         SetAniamtionSpeed(1);
         CountdownCanvas.GetComponent<Animator>().enabled = false;
         CountdownCanvas.SetActive(false);
+        AudioManager.instance.PlayBGSound(backgroundClip);
     }
 
     public void SetSpeed(float speed)

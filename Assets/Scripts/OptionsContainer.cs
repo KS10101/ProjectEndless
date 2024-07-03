@@ -28,6 +28,9 @@ public class OptionsContainer :Builder
     float lastAlpha = 0f;
     public float displayDistance = 20f;
 
+    [SerializeField] private AudioClip correctSFX;
+    [SerializeField] private AudioClip incorrectSFX;
+
 
     protected override void Build()
     {
@@ -109,6 +112,7 @@ public class OptionsContainer :Builder
         answered = true;
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         ScoreManager.instance.AddScore(CorrectOptionPoints);
+        AudioManager.instance.PlaySFX(correctSFX);
     }
 
     public void OnWrongOptionHit()
@@ -124,5 +128,6 @@ public class OptionsContainer :Builder
         answered = true;
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
+        AudioManager.instance.PlaySFX(incorrectSFX);
     }
 }

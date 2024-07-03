@@ -24,6 +24,10 @@ public class LevelGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI highScore;
 
+    [SerializeField] private AudioClip clickSFX;
+    [SerializeField] private AudioClip gameOverSFX;
+    [SerializeField] private AudioClip highscoreSFX;
+
     private void Start()
     {
         OnGameOver();
@@ -37,6 +41,7 @@ public class LevelGameManager : MonoBehaviour
 
     private void OnSubmitButtonClick()
     {
+        AudioManager.instance.PlaySFX(clickSFX);
         if (SetName() != null)
         {
             string nameText = SetName();
@@ -50,12 +55,14 @@ public class LevelGameManager : MonoBehaviour
             highscoreCanvas.SetActive(false);
             currentScore.text = ScoreManager.instance.GetCurrentScore().ToString();
             gameOverCanvas.SetActive(true);
+            
         }
 
     }
 
     public void OnGameOver()
     {
+        AudioManager.instance.StopBGSound();
         PlayerController.instance.enabled = false;
         inGameUICanvas.SetActive(false);
         if ((Leaderboard.instance.GetEntryCount() < 8 && ScoreManager.instance.GetCurrentScore() != 0) ||
@@ -63,6 +70,7 @@ public class LevelGameManager : MonoBehaviour
         {
             highScore.text = ScoreManager.instance.GetCurrentScore().ToString();
             highscoreCanvas.SetActive(true);
+            AudioManager.instance.PlaySFX(highscoreSFX);
 
         }
         else
@@ -70,6 +78,7 @@ public class LevelGameManager : MonoBehaviour
             currentScore.text = ScoreManager.instance.GetCurrentScore().ToString();
             highscoreCanvas.SetActive(false);
             gameOverCanvas.SetActive(true);
+            AudioManager.instance.PlaySFX(gameOverSFX);
         }
 
     }
@@ -92,17 +101,20 @@ public class LevelGameManager : MonoBehaviour
 
     public void Restart()
     {
+        AudioManager.instance.PlaySFX(clickSFX);
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
 
     public void GoToMenu()
     {
+        AudioManager.instance.PlaySFX(clickSFX);
         SceneManager.LoadScene((int)SceneHandler.instance.sceneSelect);
     }
 
     private void BuildLeaderboard()
     {
+        AudioManager.instance.PlaySFX(clickSFX);
         gameOverCanvas.SetActive(false);
         highscoreCanvas.SetActive(false);
         leaderboardCanvas.SetActive(true);
