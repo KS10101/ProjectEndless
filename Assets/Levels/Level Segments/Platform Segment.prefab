@@ -633,7 +633,7 @@ MonoBehaviour:
   questionText: {fileID: 6667720899860578121}
   displayDistance: 50
   correctSFX: {fileID: 8300000, guid: 60b136153e1607544a7903d7a06415b3, type: 3}
-  incorrectSFX: {fileID: 8300000, guid: 9f6b77bbfc4208a49a5d9611d84a8bef, type: 3}
+  incorrectSFX: {fileID: 8300000, guid: 97539aacc3ac8234fae53dfc88a9d99b, type: 3}
 --- !u!223 &4153496953465793408
 Canvas:
   m_ObjectHideFlags: 0

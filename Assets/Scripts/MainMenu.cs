@@ -9,8 +9,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button PlayButton;
     [SerializeField] private Button LeaderboardButton;
     [SerializeField] private Button ExitButton;
-
+    [SerializeField] private AudioClip ClickSFX;
+    [SerializeField] private AudioClip bgmClip;
     [SerializeField] private GameObject LeaderboardPanel;
+
+    private void Start()
+    {
+        AudioManager.instance.PlayBGSound(bgmClip);
+    }
 
     private void OnEnable()
     {
@@ -28,12 +34,14 @@ public class MainMenu : MonoBehaviour
 
     private void PlayGame()
     {
+        AudioManager.instance.PlaySFX(ClickSFX);
         SceneManager.LoadSceneAsync(1);
         this.gameObject.SetActive(false);
     }
 
     private void BuildLeaderboard()
     {
+        AudioManager.instance.PlaySFX(ClickSFX);
         LeaderboardPanel.SetActive(true);
         //Leaderboard.instance.ClearScoresFromJson();
         Leaderboard.instance.CreateEntry();
@@ -41,6 +49,7 @@ public class MainMenu : MonoBehaviour
 
     private void ExitGame()
     {
+        AudioManager.instance.PlaySFX(ClickSFX);
         Application.Quit();
     }
 }

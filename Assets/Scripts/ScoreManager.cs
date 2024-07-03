@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
+        ScoreTextField.gameObject.SetActive(true);
         UpdateScoreText(0);
     }
 

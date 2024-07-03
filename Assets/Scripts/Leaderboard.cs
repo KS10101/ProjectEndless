@@ -16,6 +16,9 @@ public class Leaderboard : MonoBehaviour
     private List<ScoreCard> _ScoreCardEntries = new List<ScoreCard>(8);
     ScoreCard[] ScoreEntriesArray;
     [SerializeField] private Button backButton;
+    [SerializeField] private GameObject leaderboardPanel;
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private AudioClip clickSFX;
 
     private void Awake()
     {
@@ -24,14 +27,35 @@ public class Leaderboard : MonoBehaviour
 
         UpdateList();
         SaveScoresToJSON();
-        //AddScoreCard("al-chan", 19);
-        //AddScoreCard("Gamora-Kun", 200);
-        //AddScoreCard("Divyanshu-Sama", 200);
-        //AddScoreCard("Vidhayak ji", 200);
-        //AddScoreCard("Dhruv-San", 200);
-        //AddScoreCard("Kartik cha", 200);
-        //AddScoreCard("Mishra ji", 1000);
-        //AddScoreCard("Cat", 200);
+    }
+
+    private void OnEnable()
+    {
+        backButton.onClick.AddListener(OnClickBackBut);
+    }
+
+    private void OnDisable()
+    {
+        backButton.onClick.RemoveListener(OnClickBackBut);
+    }
+
+    private void OnClickBackBut()
+    {
+        AudioManager.instance.PlaySFX(clickSFX);
+        leaderboardPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+
+    public void DeleteGeneratedEntries()
+    {
+        int entriesCount = ScoreCardsContainer.childCount;
+
+        if (entriesCount == 0) return;
+
+        for (int i = 0; i < entriesCount; i++)
+        {
+            Destroy(ScoreCardsContainer.GetChild(i).gameObject);
+        }
     }
 
     public void UpdateList()
@@ -47,6 +71,7 @@ public class Leaderboard : MonoBehaviour
 
     public void CreateEntry()
     {
+        DeleteGeneratedEntries();
         UpdateList();
         ScoreEntriesArray = SortList(_ScoreCardEntries);
 

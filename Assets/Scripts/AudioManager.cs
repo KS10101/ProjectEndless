@@ -28,8 +28,8 @@ public class AudioManager : MonoBehaviour
     {
         BG_Audio.clip = clip;
         BG_Audio.loop = true;
-        if(BG_Audio.clip != null)
-            BG_Audio.playOnAwake = true;
+        if (BG_Audio.clip != null)
+            BG_Audio.Play();
     }
 
     public void PlaySFX(AudioClip clip)
