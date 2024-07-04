@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
             this.speed = speed;
             this.runner.followSpeed = this.speed;
         }
+        else if(speed < 6 && speed > 0)
+        {
+            this.speed = 6f;
+            this.runner.followSpeed = this.speed;
+        }
         else if (this.speed <= 0)
         {
             this.speed = 0;
@@ -71,11 +76,6 @@ public class PlayerController : MonoBehaviour
 
             //LevelGameManager.instance.OnGameOver();
             Debug.Log("GAME OVER");
-        }
-        else
-        {
-            this.speed = 6f;
-            this.runner.followSpeed = this.speed;
         }
         Debug.Log($"speed : {runner.followSpeed}");
         
