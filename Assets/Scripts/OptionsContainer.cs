@@ -110,10 +110,11 @@ public class OptionsContainer :Builder
             point.ToggleCollider(false);
         }
         answered = true;
+        StreakManager.instance.MakeScoreStreak();
         ScoreManager.instance.AddScore(CorrectOptionPoints);
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         AudioManager.instance.PlaySFX(correctSFX);
-        PlayerHealthManager.instance.CancelStreak();
+        StreakManager.instance.CancelStreak();
     }
 
     public void OnWrongOptionHit()
@@ -127,9 +128,11 @@ public class OptionsContainer :Builder
             point.ToggleCollider(false);
         }
         answered = true;
+        StreakManager.instance.CancelScoreStreak();
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         AudioManager.instance.PlaySFX(incorrectSFX);
-        PlayerHealthManager.instance.MakeStreak();
+        StreakManager.instance.MakeHealthStreak();
+
     }
 }

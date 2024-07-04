@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
     private int CurrentScore = 0;
     private int MaxScore = 0;
+    public int scoreMultiplier = 1;
     public TextMeshProUGUI ScoreTextField;
 
     private void Awake()
@@ -21,7 +22,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int score)
     {
-        CurrentScore = CurrentScore + score;
+        Debug.Log("Score Multiplier : " + scoreMultiplier);
+        CurrentScore = CurrentScore + (score * scoreMultiplier);
         SetMaxScore(CurrentScore);
         UpdateScoreText(CurrentScore);
     }

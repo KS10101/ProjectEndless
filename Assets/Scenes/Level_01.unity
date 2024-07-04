@@ -4310,6 +4310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f90bd421fb40f43960e65a978d71e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreMultiplier: 1
   ScoreTextField: {fileID: 1110535061}
 --- !u!4 &1244677662
 Transform:
@@ -7524,7 +7525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836eac1f24387a147ad63d7549a64b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreStreak: 0
   desiredStreak: 3
+  multiplier: 1
 --- !u!1 &682856965625599811
 GameObject:
   m_ObjectHideFlags: 0
