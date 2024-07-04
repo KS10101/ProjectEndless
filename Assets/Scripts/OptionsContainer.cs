@@ -103,6 +103,7 @@ public class OptionsContainer :Builder
 
     public void OnRightOptionHit()
     {
+        PlayerHealthManager.instance.CancelStreak();
         foreach (OptionTab point  in _boostPoints)
         {
             if (point.IsCorrect)
@@ -117,6 +118,7 @@ public class OptionsContainer :Builder
 
     public void OnWrongOptionHit()
     {
+        PlayerHealthManager.instance.MakeStreak();
         foreach (OptionTab point in _boostPoints)
         {
             if (point.IsCorrect)
