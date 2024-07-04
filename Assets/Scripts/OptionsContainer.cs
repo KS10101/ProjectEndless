@@ -103,7 +103,6 @@ public class OptionsContainer :Builder
 
     public void OnRightOptionHit()
     {
-        PlayerHealthManager.instance.CancelStreak();
         foreach (OptionTab point  in _boostPoints)
         {
             if (point.IsCorrect)
@@ -114,11 +113,11 @@ public class OptionsContainer :Builder
         ScoreManager.instance.AddScore(CorrectOptionPoints);
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() + m_BoostAmount);
         AudioManager.instance.PlaySFX(correctSFX);
+        PlayerHealthManager.instance.CancelStreak();
     }
 
     public void OnWrongOptionHit()
     {
-        PlayerHealthManager.instance.MakeStreak();
         foreach (OptionTab point in _boostPoints)
         {
             if (point.IsCorrect)
@@ -131,5 +130,6 @@ public class OptionsContainer :Builder
         ScoreManager.instance.ReduceScore(WrongOptionPoints);
         PlayerController.instance.SetSpeed(PlayerController.instance.GetSpeed() - m_retardationAmount);
         AudioManager.instance.PlaySFX(incorrectSFX);
+        PlayerHealthManager.instance.MakeStreak();
     }
 }

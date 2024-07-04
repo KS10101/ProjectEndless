@@ -67,6 +67,7 @@ public class LevelGameManager : MonoBehaviour
     public void OnGameOver()
     {
         AudioManager.instance.StopBGSound();
+        
         PlayerController.instance.enabled = false;
         inGameUICanvas.SetActive(false);
         if ((Leaderboard.instance.GetEntryCount() < 8 && ScoreManager.instance.GetCurrentScore() != 0) ||

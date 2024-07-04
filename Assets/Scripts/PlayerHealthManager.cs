@@ -21,6 +21,7 @@ public class PlayerHealthManager : MonoBehaviour
         if (streak >= desiredStreak)
         {
             streak = 0;
+            PlayerController.instance.StopPlayer();
             LevelGameManager.instance.OnGameOver();
         }
     }

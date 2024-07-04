@@ -59,21 +59,34 @@ public class PlayerController : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
-        if(this.speed <= 30 && this.speed > 0)
+        if (speed <= 30 && speed >= 6f)
         {
             this.speed = speed;
-            this.runner.followSpeed = speed;
+            this.runner.followSpeed = this.speed;
         }
-        Debug.Log($"speed : {runner.followSpeed}");
-        if (this.speed <= 2)
+        else if (this.speed <= 0)
         {
             this.speed = 0;
-            this.runner.followSpeed = this.speed;
+            this.runner.followSpeed = 0;
 
-            LevelGameManager.instance.OnGameOver();
+            //LevelGameManager.instance.OnGameOver();
             Debug.Log("GAME OVER");
         }
+        else
+        {
+            this.speed = 6f;
+            this.runner.followSpeed = this.speed;
+        }
+        Debug.Log($"speed : {runner.followSpeed}");
+        
         SetAniamtionSpeed(this.runner.followSpeed / 10);
+    }
+
+    public void StopPlayer()
+    {
+        this.speed = 0;
+        this.runner.followSpeed = 0;
+        SetAniamtionSpeed(0);
     }
 
     private void SetAniamtionSpeed(float rate)

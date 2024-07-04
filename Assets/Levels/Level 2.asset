@@ -54,6 +54,6 @@ MonoBehaviour:
       randomizer: {fileID: 0}
       customShuffle: {fileID: 0}
       preventRepeat: 0
-  _remoteSequence: 0
-  _remoteSceneName: 
-  _loadingPriority: 1
+  _remoteSequence: 1
+  _remoteSceneName: remote Scene 1
+  _loadingPriority: 2

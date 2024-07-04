@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_01.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/remote Scene 1.unity
+    guid: a75714682a4d77b4a9a5eefec0942e52
   m_configObjects: {}
